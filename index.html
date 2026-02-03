@@ -7,17 +7,20 @@
 </head>
 <body>
 
-  <h1>Hardware Komputer</h1>
-  <p>Klik tombol di bawah untuk melihat pengertian tiap hardware.</p>
+<h1>Hardware Komputer</h1>
+<p>Klik bagian pada gambar PC untuk melihat penjelasan.</p>
 
-  <div class="card">
-    <button onclick="showInfo('cpu')">CPU</button>
-    <button onclick="showInfo('gpu')">GPU</button>
-    <button onclick="showInfo('ram')">RAM</button>
-  </div>
+<div class="pc-container">
+  <img src="pc.png" alt="PC" class="pc-image">
 
-  <div id="info"></div>
+  <!-- TITIK KLIK -->
+  <button class="hotspot cpu" onclick="showInfo('cpu')"></button>
+  <button class="hotspot gpu" onclick="showInfo('gpu')"></button>
+  <button class="hotspot ram" onclick="showInfo('ram')"></button>
+</div>
 
-  <script src="script.js"></script>
+<div id="info"></div>
+
+<script src="script.js"></script>
 </body>
 </html>
