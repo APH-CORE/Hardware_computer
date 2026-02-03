@@ -32,7 +32,20 @@ body {
   padding: 12px 24px;
   font-size: 16px;
   cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: white;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s;
 }
+
+.controls button:hover {
+  background: #2563eb;
+}
+
+.controls button:active {
+  transform: scale(0.95); /* efek ditekan */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2) inset;
 
 /* INFO BOX */
 #info {
@@ -41,3 +54,13 @@ body {
   background: white;
   padding: 20px;
   border-radius: 12px;
+
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#info.show {
+  opacity: 1;
+  transform: translateY(0);
+}
