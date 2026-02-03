@@ -5,50 +5,36 @@ body {
   padding: 30px;
 }
 
-.pc-container {
-  position: relative;
-  display: inline-block;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 20px;
 }
 
-.pc-image {
+.viewer model-viewer {
   width: 500px;
+  height: 400px;
+  background: #fff;
+  border-radius: 10px;
 }
 
-.hotspot {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 0, 0, 0.25); /* merah transparan */
-  border: 2px solid rgba(255, 0, 0, 0.6);
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.controls button {
+  padding: 12px 20px;
+  font-size: 16px;
   cursor: pointer;
-  transition: 0.2s;
-}
-
-.hotspot:hover {
-  background: rgba(255, 0, 0, 0.4);
-  transform: scale(1.1);
-}
-
-/* POSISI TITIK (SESUIKAN GAMBAR KAMU) */
-.cpu {
-  top: 110px;
-  left: 210px;
-}
-
-.gpu {
-  top: 260px;
-  left: 200px;
-}
-
-.ram {
-  top: 160px;
-  left: 260px;
 }
 
 #info {
-  margin-top: 30px;
+  margin: 30px auto 0;
+  width: 60%;
   background: white;
   padding: 20px;
-  border-radius: 8px;
-}
+  border-radius: 10px;
