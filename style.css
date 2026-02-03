@@ -34,18 +34,29 @@ body {
   cursor: pointer;
   border: none;
   border-radius: 8px;
-  background: #3b82f6;
-  color: white;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s;
+  background: #e5e7eb;   /* warna normal */
+  color: #111827;
+  transition: 
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.15s ease;
 }
 
+/* hover */
 .controls button:hover {
-  background: #2563eb;
+  background: #d1d5db;
 }
 
+/* efek ditekan */
 .controls button:active {
-  transform: scale(0.95); /* efek ditekan */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2) inset;
+  transform: scale(0.95);
+}
+
+/* TOMBOL AKTIF */
+.controls button.active {
+  background: #3b82f6;  /* biru */
+  color: white;
+}
 
 /* INFO BOX */
 #info {
