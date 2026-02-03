@@ -1,5 +1,5 @@
 function showInfo(hardware) {
-  let info = document.getElementById("info");
+  const info = document.getElementById("info");
 
   if (hardware === "cpu") {
     info.innerHTML = "<h2>CPU</h2><p>CPU adalah otak komputer yang mengolah semua perintah.</p>";
