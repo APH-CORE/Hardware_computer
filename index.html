@@ -1,23 +1,131 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Hardware Komputer</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Hardware Komputer 3D</title>
+
+<style>
+  body {
+    margin: 0;
+    background: #cfcfcf;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+
+  h1 {
+    margin-top: 20px;
+  }
+
+  #viewer {
+    width: 900px;
+    height: 450px;
+    margin: 30px auto;
+    background: #ffffff; /* kotak putih */
+    border-radius: 12px;
+  }
+
+  .buttons {
+    margin-top: 20px;
+  }
+
+  .buttons button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 6px;
+    border: 1px solid #999;
+    cursor: pointer;
+    background: #f0f0f0;
+  }
+
+  #info {
+    margin: 25px auto;
+    width: 80%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+</style>
 </head>
+
 <body>
 
-  <h1>Hardware Komputer</h1>
-  <p>Klik tombol di bawah untuk melihat pengertian tiap hardware.</p>
+<h1>Hardware Komputer</h1>
+<p>Klik tombol di bawah untuk melihat pengertian tiap hardware.</p>
 
-  <div class="card">
-    <button onclick="showInfo('cpu')">CPU</button>
-    <button onclick="showInfo('gpu')">GPU</button>
-    <button onclick="showInfo('ram')">RAM</button>
-  </div>
+<div id="viewer"></div>
 
-  <div id="info"></div>
+<div class="buttons">
+  <button onclick="setInfo('cpu')">CPU</button>
+  <button onclick="setInfo('gpu')">GPU</button>
+  <button onclick="setInfo('ram')">RAM</button>
+</div>
 
-  <script src="script.js"></script>
+<div id="info">
+  <h2>CPU</h2>
+  <p>CPU adalah otak komputer yang memproses semua perintah.</p>
+</div>
+
+<!-- THREE JS -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/loaders/GLTFLoader.js"></script>
+
+<script>
+  // ===== SCENE =====
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xffffff);
+
+  // ===== CAMERA =====
+  const camera = new THREE.PerspectiveCamera(45, 900 / 450, 0.1, 100);
+  camera.position.set(3, 2, 3);
+  camera.lookAt(0, 1, 0);
+
+  // ===== RENDERER =====
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(900, 450);
+  document.getElementById("viewer").appendChild(renderer.domElement);
+
+  // ===== LIGHT =====
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(5, 5, 5);
+  scene.add(light);
+
+  // ===== LOAD PC.GLB =====
+  let pc;
+  const loader = new THREE.GLTFLoader();
+  loader.load(
+    "pc.glb",
+    (gltf) => {
+      pc = gltf.scene;
+      pc.scale.set(1, 1, 1);
+      scene.add(pc);
+    },
+    undefined,
+    (err) => console.error("GLB ERROR", err)
+  );
+
+  // ===== ROTATE HALUS =====
+  function animate() {
+    requestAnimationFrame(animate);
+    if (pc) pc.rotation.y += 0.002;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // ===== INFO TEXT =====
+  function setInfo(type) {
+    const info = document.getElementById("info");
+    if (type === "cpu") {
+      info.innerHTML = "<h2>CPU</h2><p>CPU adalah otak komputer yang memproses semua perintah.</p>";
+    }
+    if (type === "gpu") {
+      info.innerHTML = "<h2>GPU</h2><p>GPU berfungsi mengolah grafis dan tampilan visual.</p>";
+    }
+    if (type === "ram") {
+      info.innerHTML = "<h2>RAM</h2><p>RAM menyimpan data sementara agar komputer bekerja lebih cepat.</p>";
+    }
+  }
+</script>
+
 </body>
 </html>
