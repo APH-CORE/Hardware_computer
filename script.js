@@ -1,42 +1,32 @@
-const pc = new THREE.Group();
-scene.add(pc);
+<script>
+  alert("JS HIDUP");
 
-// CASE
-const caseBody = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 4, 2),
-  new THREE.MeshStandardMaterial({ color: 0x9e9e9e })
-);
-caseBody.position.y = 2;
-pc.add(caseBody);
+  const container = document.getElementById("viewer");
 
-// MOTHERBOARD
-const mb = new THREE.Mesh(
-  new THREE.BoxGeometry(0.05, 3, 1.8),
-  new THREE.MeshStandardMaterial({ color: 0x424242 })
-);
-mb.position.set(0.55, 2, 0);
-pc.add(mb);
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x00ff00);
 
-// CPU
-const cpu = new THREE.Mesh(
-  new THREE.BoxGeometry(0.2, 0.2, 0.2),
-  new THREE.MeshStandardMaterial({ color: 0xffc107 })
-);
-cpu.position.set(0.58, 2.5, 0);
-pc.add(cpu);
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    container.clientWidth / container.clientHeight,
+    0.1,
+    100
+  );
+  camera.position.z = 5;
 
-// GPU
-const gpu = new THREE.Mesh(
-  new THREE.BoxGeometry(0.8, 0.2, 0.4),
-  new THREE.MeshStandardMaterial({ color: 0x4caf50 })
-);
-gpu.position.set(0.9, 1.4, 0);
-pc.add(gpu);
+  const renderer = new THREE.WebGLRenderer();
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  container.appendChild(renderer.domElement);
 
-// PSU
-const psu = new THREE.Mesh(
-  new THREE.BoxGeometry(0.6, 0.5, 0.6),
-  new THREE.MeshStandardMaterial({ color: 0x616161 })
-);
-psu.position.set(0.9, 0.5, 0);
-pc.add(psu);
+  const cube = new THREE.Mesh(
+    new THREE.BoxGeometry(),
+    new THREE.MeshBasicMaterial({ color: 0x0000ff })
+  );
+  scene.add(cube);
+
+  function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  }
+  animate();
+</script>
