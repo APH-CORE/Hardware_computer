@@ -1,55 +1,42 @@
-const model = document.getElementById("pcModel");
-const text = document.getElementById("infoText");
+const pc = new THREE.Group();
+scene.add(pc);
 
-/* Angle samping, CPU di tengah */
-const SIDE_ANGLE = "90deg 75deg";
+// CASE
+const caseBody = new THREE.Mesh(
+  new THREE.BoxGeometry(1, 4, 2),
+  new THREE.MeshStandardMaterial({ color: 0x9e9e9e })
+);
+caseBody.position.y = 2;
+pc.add(caseBody);
 
-function resetButtons() {
-  document.querySelectorAll("button").forEach(b => b.classList.remove("active"));
-}
+// MOTHERBOARD
+const mb = new THREE.Mesh(
+  new THREE.BoxGeometry(0.05, 3, 1.8),
+  new THREE.MeshStandardMaterial({ color: 0x424242 })
+);
+mb.position.set(0.55, 2, 0);
+pc.add(mb);
 
-function showText(msg) {
-  text.style.animation = "none";
-  text.offsetHeight;
-  text.style.animation = null;
-  text.innerText = msg;
-}
+// CPU
+const cpu = new THREE.Mesh(
+  new THREE.BoxGeometry(0.2, 0.2, 0.2),
+  new THREE.MeshStandardMaterial({ color: 0xffc107 })
+);
+cpu.position.set(0.58, 2.5, 0);
+pc.add(cpu);
 
-function zoom(radius, msg, btn) {
-  resetButtons();
-  btn.classList.add("active");
+// GPU
+const gpu = new THREE.Mesh(
+  new THREE.BoxGeometry(0.8, 0.2, 0.4),
+  new THREE.MeshStandardMaterial({ color: 0x4caf50 })
+);
+gpu.position.set(0.9, 1.4, 0);
+pc.add(gpu);
 
-  model.cameraOrbit = `${SIDE_ANGLE} ${radius}m`;
-  model.fieldOfView = "35deg"; // lebih natural, nggak terlalu zoom
-
-  showText(msg);
-}
-
-/* KOMPONEN */
-function focusCPU(btn) {
-  zoom(2.0, "CPU (Central Processing Unit) adalah otak komputer yang memproses semua instruksi.", btn);
-}
-
-function focusGPU(btn) {
-  zoom(2.1, "GPU atau VGA mengolah grafis dan tampilan visual.", btn);
-}
-
-function focusRAM(btn) {
-  zoom(2.2, "RAM menyimpan data sementara agar sistem berjalan cepat.", btn);
-}
-
-function focusMB(btn) {
-  zoom(2.3, "Motherboard menghubungkan seluruh komponen komputer.", btn);
-}
-
-function focusFan(btn) {
-  zoom(2.4, "Fan menjaga suhu komponen tetap stabil.", btn);
-}
-
-function focusStorage(btn) {
-  zoom(2.5, "Storage menyimpan sistem operasi dan data.", btn);
-}
-
-function focusPSU(btn) {
-  zoom(2.6, "PSU menyuplai daya listrik ke seluruh komponen.", btn);
-}
+// PSU
+const psu = new THREE.Mesh(
+  new THREE.BoxGeometry(0.6, 0.5, 0.6),
+  new THREE.MeshStandardMaterial({ color: 0x616161 })
+);
+psu.position.set(0.9, 0.5, 0);
+pc.add(psu);
