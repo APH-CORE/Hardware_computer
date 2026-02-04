@@ -1,15 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>PC Viewer</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<title>PC GLB TEST</title>
+<style>
+  body {
+    margin: 0;
+    background: #999;
+    overflow: hidden;
+  }
+</style>
 </head>
 <body>
 
-  <div id="container"></div>
+<script type="module">
+  import * as THREE from "https://unpkg.com/three@0.158.0/build/three.module.js";
+  import { GLTFLoader } from "https://unpkg.com/three@0.158.0/examples/jsm/loaders/GLTFLoader.js";
 
-  <!-- IMPORTANT: module -->
-  <script type="module" src="main.js"></script>
+  // SCENE
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x999999);
+
+  // CAMERA
+  const camera = new THREE.PerspectiveCamera(
+    45,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100
+  );
+  camera.position.set(3, 2, 4);
+  camera.lookAt(0, 1, 0);
+
+  // RENDERER
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  // LIGHT
+  scene.add(new THREE.AmbientLight(0xffffff, 1));
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(5, 5, 5);
+  scene.add(light);
+
+  // LOAD GLB
+  const loader = new GLTFLoader();
+  loader.load(
+    "./pc.glb",
+    (gltf) => {
+      const model = gltf.scene;
+      model.scale.set(1, 1, 1);
+      model.position.set(0, 0, 0);
+      scene.add(model);
+      console.log("✅ PC LOADED");
+    },
+    undefined,
+    (err) => console.error("❌ GLB ERROR", err)
+  );
+
+  // ANIMATE
+  function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  }
+  animate();
+</script>
+
 </body>
 </html>
