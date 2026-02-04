@@ -2,22 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Three Test</title>
+  <title>PC 3D Viewer</title>
   <style>
-    body { margin: 0; overflow: hidden; background: #aaa; }
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #bdbdbd; /* abu */
+      font-family: Arial, sans-serif;
+    }
+
+    #ui {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      padding: 10px 18px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #222;
+      color: white;
+    }
+
+    button:hover {
+      background: #444;
+    }
   </style>
 </head>
 <body>
 
-<!-- THREE JS (NON MODULE, PALING AMAN) -->
+<div id="ui">
+  <button id="toggle">Rotate ON</button>
+</div>
+
+<!-- THREE JS (PALING AMAN) -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 
 <script>
-  // SCENE
+  // ===== SCENE =====
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xaaaaaa);
+  scene.background = new THREE.Color(0xbdbdbd);
 
-  // CAMERA (samping)
+  // ===== CAMERA (samping PC) =====
   const camera = new THREE.PerspectiveCamera(
     45,
     window.innerWidth / window.innerHeight,
@@ -27,33 +58,61 @@
   camera.position.set(5, 2, 0);
   camera.lookAt(0, 1, 0);
 
-  // RENDERER
+  // ===== RENDERER =====
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
-  // LIGHT
-  const light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(5, 5, 5);
-  scene.add(light);
+  // ===== LIGHTING (DISPLAY STYLE) =====
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
+  keyLight.position.set(4, 6, 2);
+  scene.add(keyLight);
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  const fillLight = new THREE.DirectionalLight(0xffffff, 0.6);
+  fillLight.position.set(-4, 3, -2);
+  scene.add(fillLight);
 
-  // OBJECT (PC dummy)
+  const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+  scene.add(ambient);
+
+  // ===== OBJECT (PC CASE) =====
   const geometry = new THREE.BoxGeometry(1.2, 2, 0.5);
-  const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+  const material = new THREE.MeshStandardMaterial({
+    color: 0xf5f5f5   // broken white
+  });
+
   const pc = new THREE.Mesh(geometry, material);
   pc.position.y = 1;
   scene.add(pc);
 
-  // ANIMATE (rotate super halus)
+  // ===== ROTATE CONTROL =====
+  let autoRotate = true;
+  const button = document.getElementById("toggle");
+
+  button.onclick = () => {
+    autoRotate = !autoRotate;
+    button.innerText = autoRotate ? "Rotate ON" : "Rotate OFF";
+  };
+
+  // ===== ANIMATION =====
   function animate() {
     requestAnimationFrame(animate);
-    pc.rotation.y += 0.002;
+
+    if (autoRotate) {
+      pc.rotation.y += 0.0015; // super halus
+    }
+
     renderer.render(scene, camera);
   }
 
   animate();
+
+  // ===== RESPONSIVE =====
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
 </script>
 
 </body>
