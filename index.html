@@ -1,69 +1,354 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-<meta charset="UTF-8" />
-<title>PC GLB TEST</title>
-<style>
-  body {
-    margin: 0;
-    background: #999;
-    overflow: hidden;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Daffa</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 22px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #4CAF50;
+        }
+
+        /* SECTION */
+        section {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        /* PROJECT GRID */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        /* PROJECT CARD */
+        .project {
+            background-color: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .project:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+        }
+
+        /* PROJECT IMAGE */
+        .project img {
+            width: 100%;
+            height: 260px; /* UBAH INI KALAU MAU GEDE/KECIL */
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            cursor: zoom-in;
+            display: block;
+        }
+
+        .project h3 {
+            margin: 0 0 10px;
+        }
+
+        .project p {
+            margin: 0;
+            color: #555;
+        }
+
+        /* CONTACT */
+        .contact-link {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            margin-top: 60px;
+        }
+
+        /* ================= MODAL (SMOOTH ZOOM) ================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.modal.show {
+    opacity: 1;
+}
+
+/* IMAGE ZOOM ANIMATION */
+.modal-content {
+    max-width: 90%;
+    max-height: 85%;
+    border-radius: 14px;
+
+    transform: scale(0.85);
+    opacity: 0;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.modal.show .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* CLOSE BUTTON */
+.close {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+    </style>
 </head>
+
 <body>
 
-<script type="module">
-  import * as THREE from "https://unpkg.com/three@0.158.0/build/three.module.js";
-  import { GLTFLoader } from "https://unpkg.com/three@0.158.0/examples/jsm/loaders/GLTFLoader.js";
+<header>
+    <h1>Daffa Athaya Pratama H</h1>
+    <p>Multimedia Education student at UPI Cibiru, Bandung</p>
+</header>
 
-  // SCENE
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x999999);
+<nav>
+    <a href="#about">About Me</a>
+    <a href="#3D Modelling">3D Modelling</a>
+    <a href="#Photography">Photography</a>
+    <a href="#Drawing">Drawing</a>
+    <a href="#contact">Contact</a>
+</nav>
 
-  // CAMERA
-  const camera = new THREE.PerspectiveCamera(
-    45,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    100
-  );
-  camera.position.set(3, 2, 4);
-  camera.lookAt(0, 1, 0);
+<section id="about">
+    <h2>About Me</h2>
+    <p style="max-width:800px; margin:auto; text-align:justify;">
+        Hallo! Daffa APH is a Multimedia Education student at UPI Cibiru, Bandung,
+        specializing in 3D modeling, interior, drawing architecture, 3D animation, and graphic design.</p>
+    <p></p>
+    <P style="max-width:800px; margin:auto; text-align:justify;">
+        Full name: Daffa Athaya Pratama Hadiana</P>
+    <p style="max-width:800px; margin:auto; text-align:justify;">
+        Birth: 03 December 2006</p>
+    <p style="max-width:800px; margin:auto; text-align:justify;">
+        Address: Bandung, West Java, Indonesia</p>
+</section>
 
-  // RENDERER
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
+<section id="3D Modelling">
+    <h2>3D Modellings</h2>
 
-  // LIGHT
-  scene.add(new THREE.AmbientLight(0xffffff, 1));
-  const light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(5, 5, 5);
-  scene.add(light);
+    <div class="projects">
+        <div class="project">
+            <img src="images/project1.jpg" alt="Project 1">
+            <h3>Tribute For CC 201 77 17R</h3>
+            <p>This model was made by request from my friend to tribute Indonesian Locomotive CC 201 77 17R who had crash at 5 Januari 2024.</p>
+            <h3>Est. 2025</h3>
+        </div>
 
-  // LOAD GLB
-  const loader = new GLTFLoader();
-  loader.load(
-    "./pc.glb",
-    (gltf) => {
-      const model = gltf.scene;
-      model.scale.set(1, 1, 1);
-      model.position.set(0, 0, 0);
-      scene.add(model);
-      console.log("✅ PC LOADED");
-    },
-    undefined,
-    (err) => console.error("❌ GLB ERROR", err)
-  );
+        <div class="project">
+            <img src="images/project2.jpg" alt="Project 2">
+            <h3>And Journey To The New Island Is Begin</h3>
+            <p>This scene was inspired by a movie and I mix it with my imagination to made this scene.</p>
+            <h3>Est. 2025</h3>
+        </div>
 
-  // ANIMATE
-  function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
-  }
-  animate();
+        <div class="project">
+            <img src="images/project3.jpg" alt="Project 3">
+            <h3>The Old Times</h3>
+            <p>This scene was inspired when I see an old picture in social media and I mix it with my imagination to made this scene.</p>
+            <h3>Est. 2026</h3>
+        </div>
+    </div>
+</section>
+
+    <section id="Photography">
+    <h2>Photography</h2>
+
+    <div class="projects">
+        <div class="project">
+            <img src="images/project4.jpg" alt="Project 1">
+            <h3>Road At The Evening</h3>
+            <p>I capture this picture when 1'm on my way to my home.</p>
+            <h3>Est. 2024</h3>
+        </div>
+
+        <div class="project">
+            <img src="images/project5.jpg" alt="Project 2">
+            <h3>Green and Calming Scene</h3>
+            <p>I capture this picture because it's calming to see landscape like this.</p>
+            <h3>Est. 2022</h3>
+        </div>
+
+        <div class="project">
+            <img src="images/project6.jpg" alt="Project 3">
+            <h3>Pangandaran Beach From Above</h3>
+            <p>I capture this when i was on my holiday at Pangandaran Beach, West Java.</p>
+            <h3>Est. 2022</h3>
+        </div>
+    </div>
+</section>
+
+    <section id="Drawing">
+    <h2>Drawing</h2>
+
+    <div class="projects">
+        <div class="project">
+            <img src="images/project7.jpg" alt="Project 1">
+            <h3>Journey To The New World</h3>
+            <p>I drew this because I inspired by a movie.</p>
+            <h3>Est. 2022</h3>
+        </div>
+
+        <div class="project">
+            <img src="images/project8.jpg" alt="Project 2">
+            <h3>Journey To The Other Side On Earth</h3>
+            <p>I drew this because I inspired by a movie.</p>
+            <h3>Est. 2022</h3>
+        </div>
+
+        <div class="project">
+            <img src="images/project9.jpg" alt="Project 3">
+            <h3>British MBT Challenger 2 Tank</h3>
+            <p>I drew this because I like the British MBT Challenger 2 Tank.</p>
+            <h3>Est. 2022</h3>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact Me</h2>
+    <p>You can contact me at: <a class="contact-link" href="mailto:daffahadiana08@gmail.com">daffahadiana08@gmail.com</a></p>
+    <p>My social media: <a class="contact-link" href="https://www.instagram.com/daffa_athaya_pratama_h/">Instagram main account</a> | <a class="contact-link" href="https://www.instagram.com/daffa_a.p.h/">Instagram photography account</a> | <a class="contact-link" href="https://www.instagram.com/aph.3d/">Instagram 3D account</a> | <a class="contact-link" href="https://www.instagram.com/fact_around_the_world/">Instagram fact around the world account</a></p> 
+</section>
+
+<footer>
+    <p>&copy; 2026 DAPH. All rights reserved.</p>
+</footer>
+
+    <!-- MODAL -->
+<div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImg">
+</div>
+
+<!-- SCRIPT -->
+<script>
+    // ELEMENT
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+    const closeBtn = document.querySelector(".close");
+
+    // OPEN MODAL
+    document.querySelectorAll(".project img").forEach(img => {
+        img.addEventListener("click", () => {
+            modal.style.display = "flex";
+
+            // trigger animation
+            setTimeout(() => {
+                modal.classList.add("show");
+            }, 10);
+
+            modalImg.src = img.src;
+        });
+    });
+
+    // CLOSE FUNCTION
+    function closeModal() {
+        modal.classList.remove("show");
+
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 300);
+    }
+
+    // CLOSE BUTTON
+    closeBtn.addEventListener("click", closeModal);
+
+    // CLICK OUTSIDE IMAGE
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // ESC KEY
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            closeModal();
+        }
+    });
 </script>
-
 </body>
 </html>
